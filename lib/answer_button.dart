@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AnswerButton extends StatelessWidget {
-  const AnswerButton(this.answerText, this.selectHandler, {super.key});
+  const AnswerButton({super.key, required this.answerText, required this.onTap});
 
   final String answerText;
-  final void Function() selectHandler;
+  final void Function() onTap;
 
   @override
   Widget build(context) {
     return ElevatedButton(
-      onPressed: selectHandler,
+      onPressed: onTap,
       style: ElevatedButton.styleFrom(
         foregroundColor: const Color.fromARGB(255, 156, 155, 156),
         textStyle: const TextStyle(fontSize: 24),

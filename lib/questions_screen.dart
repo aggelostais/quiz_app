@@ -4,7 +4,9 @@ import 'package:quiz_app/answer_button.dart';
 import 'package:quiz_app/data/questions.dart';
 
 class QuestionsScreen extends StatefulWidget {
-  const QuestionsScreen({super.key});
+  const QuestionsScreen({super.key, required this.onSelectAnswer});
+  final void Function(String answer)
+      onSelectAnswer; //gets the function executed when answer selected from the parent widget as parameter
 
   @override
   State<QuestionsScreen> createState() => _QuestionsScreenState();
@@ -13,10 +15,11 @@ class QuestionsScreen extends StatefulWidget {
 class _QuestionsScreenState extends State<QuestionsScreen> {
   var currentQuestionIndex = 0;
 
-  void answerQuestion() {
+  void answerQuestion(String selectedAnswer) {
+    widget.onSelectAnswer(questions[currentQuestionIndex].answers[
+        0]); // widget. gives access to the properties of the widget class and its properties
     setState(() {
-      // setState triggers the build method to be called again
-      currentQuestionIndex++;
+      currentQuestionIndex++; // setState triggers the build method to be called again
     });
   }
 
@@ -51,11 +54,22 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
 
             // It will return a list of AnswerButton widgets
             // ... is a spread operator that taks a list and pulls all the elements out of it
-            ...currentQuestion
-                .getShuffledAnswers()
-                .map((answer) => AnswerButton(answer, () {
-                      answerQuestion();
-                    }))
+            ...currentQuestion.getShuffledAnswers().map((answer) => Column(
+                  mainAxisAlignment:
+                      MainAxisAlignment.center, // vertical alignment
+                  crossAxisAlignment: CrossAxisAlignment
+                      .stretch, // horizontal alignment, it should take all available space
+                  children: [
+                    // calls the AnswerButton widget and passes the answer
+                    AnswerButton(
+                        answerText: answer, //answer text to be displayed is passed
+                        onTap: () {
+                          answerQuestion(answer); //
+                          const SizedBox(height: 20);
+                        }),
+                    const SizedBox(height: 10),
+                  ],
+                ))
             // Generates a list of widgets dynamically mapping a list of answers to a list of AnswerButton widgets
           ],
         ),

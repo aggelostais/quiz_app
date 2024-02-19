@@ -3,11 +3,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 class StartScreen extends StatelessWidget {
   // In that way we can pass a pointer to the switchScreen function that should be accessed
-  // We now can call just startQuiz() to execute the function
-  // with this.startQuiz we set the function passed to the internal function startQuiz
-  const StartScreen(this.startQuiz, {super.key});
+  // We now can call just startQuestions() to execute the function
+  // with this.startQuestions we set the function passed to the internal function startQuestions
+  const StartScreen({super.key, required this.startQuestions});
 
-  final void Function() startQuiz;
+  final void Function() startQuestions;
 
   @override
   Widget build(context) {
@@ -32,7 +32,7 @@ class StartScreen extends StatelessWidget {
           ),
           const Padding(padding: EdgeInsets.all(20)),
           ElevatedButton.icon(
-            onPressed: startQuiz,
+            onPressed: startQuestions,
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.all(20),
               foregroundColor: const Color.fromARGB(255, 156, 155, 156),
