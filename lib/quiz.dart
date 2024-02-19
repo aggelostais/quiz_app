@@ -60,7 +60,6 @@ class _QuizState extends State<Quiz> {
     //       ? StartScreen(switchScreen) 
     //       : const QuestionsScreen();
 
-
     return MaterialApp(
       home: Scaffold(
         //We wrap it in container here to apply the same gradient to all screens
