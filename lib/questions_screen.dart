@@ -16,8 +16,8 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
   var currentQuestionIndex = 0;
 
   void answerQuestion(String selectedAnswer) {
-    widget.onSelectAnswer(questions[currentQuestionIndex].answers[
-        0]); // widget. gives access to the properties of the widget class and its properties
+    widget.onSelectAnswer(
+        selectedAnswer); // widget. gives access to the properties of the widget class and its properties
     setState(() {
       currentQuestionIndex++; // setState triggers the build method to be called again
     });
@@ -62,7 +62,8 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                   children: [
                     // calls the AnswerButton widget and passes the answer
                     AnswerButton(
-                        answerText: answer, //answer text to be displayed is passed
+                        answerText:
+                            answer, //answer text to be displayed is passed
                         onTap: () {
                           answerQuestion(answer); //
                           const SizedBox(height: 20);

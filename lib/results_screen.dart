@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/data/questions.dart';
+import 'package:quiz_app/questions_summary.dart';
 
 class ResultsScreen extends StatelessWidget {
   const ResultsScreen(
@@ -21,10 +22,18 @@ class ResultsScreen extends StatelessWidget {
         'user_answer': chosenAnswers[i],
       });
     }
+    return summary;
   }
 
   @override
   Widget build(context) {
+    final summaryData = getSummaryData();
+    final numTotalQuestions = questions.length;
+    final numCorrectAnswers = summaryData.where((data) { //creates a new filtered list
+      return data['correct_answer'] == data['user_answer'];
+    }).length;
+
+
     return SizedBox(
       width: double.infinity, // takes all available space
       child: Container(
@@ -32,16 +41,8 @@ class ResultsScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center, // vertical alignment
           children: [
-            const Text(
-              'Results',
-              style: TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 20),
-            for (var result in chosenAnswers) Text(result),
-            const SizedBox(height: 20),
+            Text('You have answered $numCorrectAnswers out of $numTotalQuestions questions correctly!'),
+            QuestionsSummary(summaryData: summaryData), //we are not passing the function to be executed but the return result of the function
             ElevatedButton(
               onPressed: () {
                 restartQuiz();

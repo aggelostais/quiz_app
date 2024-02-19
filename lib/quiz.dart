@@ -42,11 +42,11 @@ class _QuizState extends State<Quiz> {
   // The StartScreen that will initiate the state change should have access to the state change method
   void switchScreen() {
     setState(() {
-      if (activeScreen == 'start-screen'){ 
+      if (activeScreen == 'start-screen') {
         activeScreen = 'questions-screen';
-       }
-      else {
+      } else {
         activeScreen = 'start-screen';
+        selectedAnswers = [];
       }
       // activeScreen = const QuestionsScreen();
     });
@@ -55,10 +55,10 @@ class _QuizState extends State<Quiz> {
 // Adds the selected answer to the list
   void chooseAnswer(String answer) {
     selectedAnswers.add(answer);
+    print(selectedAnswers);
     if (selectedAnswers.length == questions.length) {
       setState(() {
         activeScreen = 'result-screen';
-        selectedAnswers = [];
       });
     }
   }
@@ -70,11 +70,11 @@ class _QuizState extends State<Quiz> {
     if (activeScreen == 'questions-screen') {
       screenWidget = QuestionsScreen(
         onSelectAnswer:
-            chooseAnswer, //gives the function that should be executed when asnwer is selected
+            chooseAnswer, //gives the function that should be executed when answer is selected
       );
-    }
-    else if (activeScreen == 'result-screen') {
-      screenWidget = ResultsScreen(chosenAnswers: selectedAnswers, restartQuiz: switchScreen);
+    } else if (activeScreen == 'result-screen') {
+      screenWidget = ResultsScreen(
+          chosenAnswers: selectedAnswers, restartQuiz: switchScreen);
     }
 
     // ternary-expression: condition ? true : false
