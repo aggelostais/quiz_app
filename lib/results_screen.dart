@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/data/questions.dart';
 import 'package:quiz_app/questions_summary.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ResultsScreen extends StatelessWidget {
   const ResultsScreen(
@@ -41,13 +42,32 @@ class ResultsScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center, // vertical alignment
           children: [
-            Text('You have answered $numCorrectAnswers out of $numTotalQuestions questions correctly!'),
+            Text('You have answered $numCorrectAnswers out of $numTotalQuestions questions correctly!',
+                style: GoogleFonts.lato(
+                  textStyle: const TextStyle(
+                    color: Color.fromRGBO(255, 255, 255, 0.779),
+                    fontSize: 24,
+                  ),
+                ),
+                textAlign: TextAlign.center),
+            const SizedBox(height: 20),
             QuestionsSummary(summaryData: summaryData), //we are not passing the function to be executed but the return result of the function
-            ElevatedButton(
-              onPressed: () {
-                restartQuiz();
-              },
-              child: const Text('Restart Quiz'),
+            const SizedBox(height: 20),
+            ElevatedButton.icon(
+            onPressed: restartQuiz,
+            style: ElevatedButton.styleFrom(
+              padding: const EdgeInsets.all(15),
+              foregroundColor: const Color.fromARGB(255, 156, 155, 156),
+            ),
+            icon: const Icon(Icons.restart_alt_rounded, size: 30),
+            label: Text(
+              'Restart Quiz!',
+              style: GoogleFonts.lato(
+                textStyle: const TextStyle(
+                  fontSize: 24,
+                ),
+            ),
+            ),
             ),
           ],
         ),

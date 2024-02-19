@@ -55,7 +55,6 @@ class _QuizState extends State<Quiz> {
 // Adds the selected answer to the list
   void chooseAnswer(String answer) {
     selectedAnswers.add(answer);
-    print(selectedAnswers);
     if (selectedAnswers.length == questions.length) {
       setState(() {
         activeScreen = 'result-screen';
@@ -86,11 +85,11 @@ class _QuizState extends State<Quiz> {
       home: Scaffold(
         body: Container(
           //We wrap it in container here to apply the same gradient to all screens
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Color.fromARGB(255, 110, 59, 96),
-                Color.fromARGB(255, 179, 148, 170)
+                Colors.blue.shade900,
+                Colors.blueGrey.shade400,
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
