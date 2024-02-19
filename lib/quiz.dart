@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quiz_app/data/questions.dart';
 import 'package:quiz_app/start_screen.dart';
 import 'package:quiz_app/questions_screen.dart';
+import 'package:quiz_app/results_screen.dart';
 
 // the button that should trigger the state change is in one widget and the widget that should be affected
 // by the state change is another widget.
@@ -41,7 +42,12 @@ class _QuizState extends State<Quiz> {
   // The StartScreen that will initiate the state change should have access to the state change method
   void switchScreen() {
     setState(() {
-      activeScreen = 'questions-screen';
+      if (activeScreen == 'start-screen'){ 
+        activeScreen = 'questions-screen';
+       }
+      else {
+        activeScreen = 'start-screen';
+      }
       // activeScreen = const QuestionsScreen();
     });
   }
@@ -51,7 +57,7 @@ class _QuizState extends State<Quiz> {
     selectedAnswers.add(answer);
     if (selectedAnswers.length == questions.length) {
       setState(() {
-        activeScreen = 'start-screen';
+        activeScreen = 'result-screen';
         selectedAnswers = [];
       });
     }
@@ -66,6 +72,9 @@ class _QuizState extends State<Quiz> {
         onSelectAnswer:
             chooseAnswer, //gives the function that should be executed when asnwer is selected
       );
+    }
+    else if (activeScreen == 'result-screen') {
+      screenWidget = ResultsScreen(chosenAnswers: selectedAnswers, restartQuiz: switchScreen);
     }
 
     // ternary-expression: condition ? true : false
